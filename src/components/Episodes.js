@@ -5,12 +5,12 @@ export default function Episodes(props) {
 	return (
 		<div className='episodes' data-testid='episodes'>
 			{props.episodes.map((e) => (
-				<div className='episode' key={e.id} data-testid='episode'>
+				<div className='episode' key={e.id}>
 					{e.image && (
 						<img className='episode-image' src={e.image.medium} alt={e.name} />
 					)}
 					<div className='episode-info'>
-						<p className='episode-number'>
+						<p className='episode-number' data-testid='episode'>
 							Season {e.season}, Episode {e.number}
 						</p>
 						<h3>{e.name}</h3>

@@ -9,7 +9,9 @@ jest.mock('../api/fetchShows');
 test('episodes render correctly', async () => {
 	mockFetchShows.mockResolvedValueOnce({ data: mockData });
 
-	const { rerender, getAllByTestId } = render(<Episodes episodes={[]} />);
+	const { rerender, getAllByTestId, getByText } = render(
+		<Episodes episodes={[]} />
+	);
 	await waitFor(() => {
 		expect(getAllByTestId(/episode/i)).toHaveLength(1);
 	});
@@ -17,5 +19,8 @@ test('episodes render correctly', async () => {
 
 	await waitFor(() => {
 		expect(getAllByTestId(/episode/i)).toHaveLength(27);
+
+		expect(getByText(/season 1, episode 3/i)).toBeInTheDocument();
+		expect(getByText(/season 2, episode 4/i)).toBeInTheDocument();
 	});
 });
