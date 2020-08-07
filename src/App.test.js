@@ -26,7 +26,26 @@ test('fetches data and renders', async () => {
 	});
 });
 
-test('dropdown value can be selected and changed', async () => {
+test('show dropdown value can be selected and changed', async () => {
+	mockFetchShows.mockResolvedValueOnce({ data: mockData });
+	const { getByText } = render(<App />);
+
+	await waitFor(() => {
+		const dropdown = getByText(/stranger-things/i);
+
+		dropdown.value = 'star-trek';
+		expect(dropdown.value).toBe('star-trek');
+		fireEvent.click(dropdown);
+		expect(dropdown.value).toBe('star-trek');
+
+		dropdown.value = 'peep-show';
+		expect(dropdown.value).toBe('peep-show');
+		fireEvent.click(dropdown);
+		expect(dropdown.value).toBe('peep-show');
+	});
+});
+
+test('season dropdown value can be selected and changed', async () => {
 	mockFetchShows.mockResolvedValueOnce({ data: mockData });
 	const { getByText } = render(<App />);
 
